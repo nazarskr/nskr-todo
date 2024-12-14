@@ -1,7 +1,7 @@
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { Routes } from '@angular/router';
-import { PageTitle } from '../../core/enums/page-title.enum';
+import { PageTitle } from '@core/enums/page-title.enum';
 
 export const authRoutes: Routes = [
   {
