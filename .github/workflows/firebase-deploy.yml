@@ -23,7 +23,7 @@ jobs:
         run: |
           printf "export const environment = {
             production: true,
-            firebase: {
+            firebaseConfig: {
               apiKey: '${{ secrets.FIREBASE_API_KEY }}',
               appId: '${{ secrets.FIREBASE_APP_ID }}'
               authDomain: '${{ secrets.FIREBASE_AUTH_DOMAIN }}',
