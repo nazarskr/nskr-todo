@@ -32,6 +32,10 @@ body {
     .page {
       background-color: colors.$background-dark;
     }
+
+    .text {
+      color: colors.$text-dark;
+    }
   }
 }
 
@@ -39,4 +43,20 @@ body {
   display: block;
   min-height: 100vh;
   background-color: colors.$background-light;
+}
+
+.text {
+  color: colors.$text-light;
+}
+
+.message-success {
+  background-color: colors.$message-success;
+}
+
+.message-warning {
+  background-color: colors.$message-warning;
+}
+
+.message-error {
+  background-color: colors.$message-error;
 }
