@@ -1,5 +1,4 @@
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
 import { Routes } from '@angular/router';
 import { PageTitle } from '@core/enums/page-title.enum';
 
@@ -9,11 +8,11 @@ export const authRoutes: Routes = [
     component: LoginComponent,
     title: PageTitle.LOGIN,
   },
-  {
-    path: 'register',
-    component: RegisterComponent,
-    title: PageTitle.REGISTER,
-  },
+  // {
+  //   path: 'register',
+  //   component: RegisterComponent,
+  //   title: PageTitle.REGISTER,
+  // },
   {
     path: '',
     redirectTo: 'login',

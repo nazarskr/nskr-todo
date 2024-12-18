@@ -1,9 +1,21 @@
 @use "colors";
+@use "@angular/material" as mat;
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html {
+  color-scheme: light;
+  @include mat.theme(
+    (
+      color: mat.$cyan-palette,
+      typography: Roboto,
+      density: 0,
+    )
+  );
 }
 
 html,
@@ -13,14 +25,18 @@ body {
 
 body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
-}
 
-:root {
-  --mdc-extended-fab-container-height: 48px;
+  &.dark-theme {
+    color-scheme: dark;
+
+    .page {
+      background-color: colors.$background-dark;
+    }
+  }
 }
 
 .page {
   display: block;
   min-height: 100vh;
-  background-color: colors.$light-cyan;
+  background-color: colors.$background-light;
 }
