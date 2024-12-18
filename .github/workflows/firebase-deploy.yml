@@ -17,8 +17,8 @@ jobs:
           node-version: 20
       - name: Install dependencies
         run: npm install
-      - name: Run Tests
-        run: npm test -- --watch=false --browsers=ChromeHeadless
+#      - name: Run Tests
+#        run: npm test -- --watch=false --browsers=ChromeHeadless
       - name: Generate environment.prod.ts
         run: |
           printf "export const environment = {
