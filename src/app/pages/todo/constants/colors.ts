@@ -1,5 +1,5 @@
-import { Priority } from '../enums/priority.enum';
-import { Status } from '../enums/status.enum';
+import { Priority } from '../enums';
+import { Status } from '../enums';
 
 export const priorityColors: Record<Priority, string> = {
   [Priority.LOW]: 'lightgreen',
