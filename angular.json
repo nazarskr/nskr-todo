@@ -39,7 +39,9 @@
                 "src/styles"
               ]
             },
-            "scripts": []
+            "scripts": [],
+            "extractLicenses": false,
+            "prerender": false
           },
           "configurations": {
             "production": {
