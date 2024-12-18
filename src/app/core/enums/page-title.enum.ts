@@ -1,5 +1,5 @@
 export enum PageTitle {
-  TODO = 'Todo',
+  TASKS = 'Tasks',
   LOGIN = 'Login',
   REGISTER = 'Register',
   NOT_FOUND = 'Not Found',

@@ -1,13 +1,13 @@
 import { Routes } from '@angular/router';
-import { TodoComponent } from './pages/todo/todo.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { PageTitle } from '@core/enums/page-title.enum';
+import { TasksComponent } from './pages/tasks/tasks.component';
 
 export const routes: Routes = [
   {
-    path: 'todo',
-    component: TodoComponent,
-    title: PageTitle.TODO,
+    path: 'tasks:uid',
+    component: TasksComponent,
+    title: PageTitle.TASKS,
   },
   {
     path: 'auth',
@@ -16,7 +16,7 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'todo',
+    redirectTo: 'tasks',
     pathMatch: 'full',
   },
   {
