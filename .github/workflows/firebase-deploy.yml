@@ -42,5 +42,7 @@ jobs:
         run: |
           echo "${FIREBASE_SERVICE_ACCOUNT_KEY}" > /tmp/firebase-key.json
           gcloud auth activate-service-account --key-file=/tmp/firebase-key.json
+          gcloud config set project $(cat /tmp/firebase-key.json | jq -r .project_id)
+          firebase auth:login:ci --token $(gcloud auth print-access-token)
       - name: Deploy to Firebase Hosting
         run: firebase deploy
