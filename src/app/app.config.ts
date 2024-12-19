@@ -13,6 +13,5 @@ export const appConfig: ApplicationConfig = {
     ...appStore,
     ...appFirebaseConfig,
     provideAnimationsAsync(),
-    provideAnimationsAsync(),
   ],
 };

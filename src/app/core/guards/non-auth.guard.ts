@@ -1,18 +1,19 @@
 import { CanActivateFn, Router } from '@angular/router';
-import { Auth } from '@angular/fire/auth';
+import { Auth, user } from '@angular/fire/auth';
 import { inject } from '@angular/core';
+import { map } from 'rxjs';
 
 export const nonAuthGuard: CanActivateFn = () => {
-  const auth = inject(Auth);
   const router = inject(Router);
+  const auth = inject(Auth);
 
-  const user = auth.currentUser;
-  console.log(user);
-
-  if (user) {
-    const { uid } = user;
-    return router.createUrlTree(['tasks', uid]);
-  } else {
-    return true;
-  }
+  return user(auth).pipe(
+    map((currentUser) => {
+      if (currentUser) {
+        return router.createUrlTree(['tasks', currentUser.uid]);
+      } else {
+        return true;
+      }
+    }),
+  );
 };
