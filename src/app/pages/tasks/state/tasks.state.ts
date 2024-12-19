@@ -1,17 +1,21 @@
-import { Task } from '../interfaces';
+import { Filters, Task } from '../interfaces';
 import { initialRequestStatus, RequestStatus } from './utils';
-import { Status } from '../enums';
+import { SortDirection } from '../enums';
 
 export interface TasksState {
   tasks: Task[];
   requestStatus: RequestStatus;
-  filterStatus: 'all' | Status;
-  searchQuery: string;
+  filters: Filters;
 }
 
-export const initialState: TasksState = {
+export const initialTasksState: TasksState = {
   tasks: [],
   requestStatus: initialRequestStatus,
-  filterStatus: 'all',
-  searchQuery: '',
+  filters: {
+    sortBy: 'creationDate',
+    sortDirection: SortDirection.ASC,
+    status: 'all',
+    priority: 'all',
+    searchQuery: '',
+  },
 };

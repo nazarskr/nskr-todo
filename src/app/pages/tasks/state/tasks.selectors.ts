@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { TasksState } from './tasks.state';
-import { filterBySearchQuery, filterByStatus } from './utils';
+import { Task, Filters } from '../interfaces';
 
 export const selectTasksState = createFeatureSelector<TasksState>('tasks');
 
@@ -19,22 +19,42 @@ export const selectError = createSelector(
   (state) => state.requestStatus.error,
 );
 
-export const selectFilterStatus = createSelector(
+export const selectFilters = createSelector(
   selectTasksState,
-  (state) => state.filterStatus,
+  (state) => state.filters,
 );
 
-export const selectSearchQuery = createSelector(
+export const selectFilteredAndSortedTasks = createSelector(
   selectTasksState,
-  (state) => state.searchQuery,
-);
+  selectFilters,
+  (state: TasksState, filters: Filters) => {
+    let filteredTasks = [...state.tasks];
 
-export const selectFilteredAndSearchedTasks = createSelector(
-  selectTasks,
-  selectFilterStatus,
-  selectSearchQuery,
-  (tasks, filterStatus, searchQuery) =>
-    tasks
-      .filter(filterByStatus(filterStatus))
-      .filter(filterBySearchQuery(searchQuery)),
+    filteredTasks.sort((a: Task, b: Task) => {
+      const direction = filters.sortDirection === 'asc' ? 1 : -1;
+
+      // TODO fix
+      // if (a[filters.sortBy] < b[filters.sortBy]) return -1 * direction;
+      // if (a[filters.sortBy] > b[filters.sortBy]) return 1 * direction;
+      if (a['creationDate'] < b['creationDate']) return -1 * direction;
+      if (a['creationDate'] > b['creationDate']) return 1 * direction;
+      return 0;
+    });
+
+    if (filters.status !== 'all') {
+      filteredTasks = filteredTasks.filter(
+        (task) => task.status === filters.status,
+      );
+    }
+
+    if (filters.searchQuery) {
+      filteredTasks = filteredTasks.filter((task) =>
+        task.description
+          .toLowerCase()
+          .includes(filters.searchQuery.toLowerCase()),
+      );
+    }
+
+    return filteredTasks;
+  },
 );

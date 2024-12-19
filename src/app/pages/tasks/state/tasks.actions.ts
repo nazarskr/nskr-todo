@@ -1,6 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Task } from '../interfaces';
-import { Status } from '../enums';
+import { Task, Filters } from '../interfaces';
 
 export const loadTasks = createAction(
   '[Tasks] Load Tasks',
@@ -67,12 +66,6 @@ export const bulkUpdateTasksFailure = createAction(
   props<{ error: string }>(),
 );
 
-export const setFilterStatus = createAction(
-  '[Tasks] Set Filter Status',
-  props<{ filterStatus: 'all' | Status }>(),
-);
+export const setFilters = createAction('[Tasks] Set Filters', props<Filters>());
 
-export const setSearchQuery = createAction(
-  '[Tasks] Set Search Query',
-  props<{ searchQuery: string }>(),
-);
+export const clearFilters = createAction('[Tasks] Clear Filters');

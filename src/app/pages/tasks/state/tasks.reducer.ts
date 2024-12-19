@@ -1,10 +1,10 @@
 import { createReducer, on } from '@ngrx/store';
 import * as TasksActions from './tasks.actions';
 import { startLoading, requestSuccess, requestFailure } from './utils';
-import { initialState } from './tasks.state';
+import { initialTasksState } from './tasks.state';
 
 export const tasksReducer = createReducer(
-  initialState,
+  initialTasksState,
 
   on(TasksActions.loadTasks, (state) => ({
     ...state,
@@ -83,13 +83,23 @@ export const tasksReducer = createReducer(
     requestStatus: requestFailure(error),
   })),
 
-  on(TasksActions.setFilterStatus, (state, { filterStatus }) => ({
+  on(
+    TasksActions.setFilters,
+    (state, { sortBy, sortDirection, status, priority, searchQuery }) => ({
+      ...state,
+      filters: {
+        ...state.filters,
+        ...(sortBy !== undefined ? { sortBy } : {}),
+        ...(sortDirection !== undefined ? { sortDirection } : {}),
+        ...(status !== undefined ? { status } : {}),
+        ...(priority !== undefined ? { searchQuery } : {}),
+        ...(searchQuery !== undefined ? { searchQuery } : {}),
+      },
+    }),
+  ),
+  // Очищення фільтрів
+  on(TasksActions.clearFilters, (state) => ({
     ...state,
-    filterStatus,
-  })),
-
-  on(TasksActions.setSearchQuery, (state, { searchQuery }) => ({
-    ...state,
-    searchQuery,
+    filters: initialTasksState.filters,
   })),
 );

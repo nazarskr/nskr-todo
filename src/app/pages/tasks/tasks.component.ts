@@ -3,18 +3,14 @@ import { UserComponent } from './components/user/user.component';
 import { PageComponent } from '@core/base/page';
 import { Store } from '@ngrx/store';
 import {
-  selectFilteredAndSearchedTasks,
-  selectFilterStatus,
+  selectFilteredAndSortedTasks,
   selectLoading,
-  selectSearchQuery,
 } from './state/tasks.selectors';
 import {
   bulkUpdateTasks,
   createTask,
   deleteTask,
   loadTasks,
-  setFilterStatus,
-  setSearchQuery,
   updateTask,
 } from './state/tasks.actions';
 import { Task } from './interfaces';
@@ -40,12 +36,8 @@ import { TaskFilterComponent } from './components/task-filter/task-filter.compon
 export class TasksComponent extends PageComponent implements OnInit {
   private store: Store = inject(Store);
 
-  tasks$: Observable<Task[]> = this.store.select(
-    selectFilteredAndSearchedTasks,
-  );
+  tasks$: Observable<Task[]> = this.store.select(selectFilteredAndSortedTasks);
   loading$: Observable<boolean> = this.store.select(selectLoading);
-  filterStatus$: Observable<string> = this.store.select(selectFilterStatus);
-  searchQuery$: Observable<string> = this.store.select(selectSearchQuery);
 
   userId!: string;
   selectedTasks: string[] = [];
@@ -55,7 +47,6 @@ export class TasksComponent extends PageComponent implements OnInit {
       this.userId = params.get('uid') || '';
       if (this.userId !== '') {
         this.store.dispatch(loadTasks({ userId: this.userId }));
-        this.fakeAddTask();
       }
     });
   }
@@ -91,28 +82,5 @@ export class TasksComponent extends PageComponent implements OnInit {
         updatedFields,
       }),
     );
-  }
-
-  setFilter(filterStatus: 'all' | Status): void {
-    this.store.dispatch(setFilterStatus({ filterStatus }));
-  }
-
-  setSearch(searchQuery: string): void {
-    this.store.dispatch(setSearchQuery({ searchQuery }));
-  }
-
-  fakeAddTask(): void {
-    const task: Task = {
-      id: '',
-      description: 'New Task',
-      dueDate: new Date(),
-      creationDate: new Date(),
-      // checkMark: false,
-      completionDate: null,
-      priority: Priority.MEDIUM,
-      status: Status.IN_PROGRESS,
-    };
-
-    this.store.dispatch(createTask({ userId: this.userId, task }));
   }
 }

@@ -6,8 +6,6 @@ import {
   collection,
   getDocs,
   doc,
-  getDoc,
-  setDoc,
   updateDoc,
   deleteDoc,
   addDoc,
@@ -40,27 +38,11 @@ export class TasksService {
   }
 
   createTask(userId: string, task: Task): Observable<unknown> {
-    const userDocRef = doc(this.firestore, `users/${userId}`);
-    return from(getDoc(userDocRef)).pipe(
-      mergeMap((docSnap) => {
-        if (!docSnap.exists()) {
-          const initialData = {
-            tasks: [],
-            createdAt: new Date(),
-          };
-          return from(setDoc(userDocRef, initialData));
-        }
-        return of();
-      }),
-      mergeMap(() => {
-        const tasksCollection = collection(
-          this.firestore,
-          `users/${userId}/tasks`,
-        ) as CollectionReference;
-        console.log({ task, tasksCollection });
-        return from(addDoc(tasksCollection, task));
-      }),
-    );
+    const tasksCollection = collection(
+      this.firestore,
+      `users/${userId}/tasks`,
+    ) as CollectionReference;
+    return from(addDoc(tasksCollection, task));
   }
 
   updateTask(
