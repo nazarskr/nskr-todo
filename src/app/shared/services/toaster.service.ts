@@ -6,6 +6,7 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 })
 export class ToasterService {
   private _snackBar = inject(MatSnackBar);
+
   private defaultConfig: MatSnackBarConfig = {
     duration: 3000,
     horizontalPosition: 'center',

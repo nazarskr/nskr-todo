@@ -5,11 +5,11 @@ import { Title } from '@angular/platform-browser';
 
 @Directive()
 export abstract class PageComponent {
+  protected route = inject(ActivatedRoute);
+  private titleService = inject(Title);
+
   @HostBinding('class') className = 'page';
   pageTitle!: PageTitle;
-
-  private route = inject(ActivatedRoute);
-  private titleService = inject(Title);
 
   constructor() {
     this.setPageTitle();

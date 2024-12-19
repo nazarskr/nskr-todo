@@ -1,21 +1,23 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import {
-  Auth,
-  signInWithPopup,
+  getAuth,
   GoogleAuthProvider,
+  signInWithPopup,
   signOut,
+  onAuthStateChanged,
   User,
-} from '@angular/fire/auth';
+} from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  private auth = getAuth();
   private userSubject = new BehaviorSubject<User | null>(null);
 
-  constructor(private auth: Auth) {
-    this.auth.onAuthStateChanged((user) => {
+  constructor() {
+    onAuthStateChanged(this.auth, (user) => {
       this.userSubject.next(user);
     });
   }

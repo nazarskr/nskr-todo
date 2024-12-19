@@ -1,3 +1,7 @@
 <nskr-user></nskr-user>
+<nskr-task-filter></nskr-task-filter>
+<nskr-task-list [tasks$]="tasks$"></nskr-task-list>
 
-<nskr-loading *ngIf="loading$ | async"></nskr-loading>
+@if (loading$ | async) {
+  <nskr-loading></nskr-loading>
+}

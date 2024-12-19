@@ -1,6 +1,9 @@
 @use "mixins";
+@use "colors";
+
 .overlay {
   width: 100vw;
   height: 100vh;
+  background-color: colors.$overlay-backdrop-color;
   @include mixins.flex-row-center;
 }

@@ -1,32 +1,66 @@
 import { inject, Injectable } from '@angular/core';
+import { Observable, from, of, forkJoin } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
 import {
   Firestore,
   collection,
+  getDocs,
   doc,
+  getDoc,
   setDoc,
   updateDoc,
   deleteDoc,
-  collectionData,
-} from '@angular/fire/firestore';
+  addDoc,
+  CollectionReference,
+} from 'firebase/firestore';
 import { Task } from '../interfaces';
-import { forkJoin, from, Observable } from 'rxjs';
+import { FIRESTORE } from '../../../firebase.config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TasksService {
-  private firestore = inject(Firestore);
+  private firestore: Firestore = inject(FIRESTORE);
 
   getTasksForUser(userId: string): Observable<Task[]> {
-    const tasksCollection = collection(this.firestore, `users/${userId}/tasks`);
-    return collectionData(tasksCollection, { idField: 'id' }) as Observable<
-      Task[]
-    >;
+    const tasksCollection = collection(
+      this.firestore,
+      `users/${userId}/tasks`,
+    ) as CollectionReference;
+
+    return from(getDocs(tasksCollection)).pipe(
+      mergeMap((querySnapshot) => {
+        const tasks: Task[] = [];
+        querySnapshot.forEach((docSnap) => {
+          tasks.push({ ...(docSnap.data() as Task), id: docSnap.id });
+        });
+        return of(tasks);
+      }),
+    );
   }
 
-  createTask(userId: string, task: Task): Observable<void> {
-    const taskDoc = doc(collection(this.firestore, `users/${userId}/tasks`));
-    return from(setDoc(taskDoc, { ...task, id: taskDoc.id }));
+  createTask(userId: string, task: Task): Observable<unknown> {
+    const userDocRef = doc(this.firestore, `users/${userId}`);
+    return from(getDoc(userDocRef)).pipe(
+      mergeMap((docSnap) => {
+        if (!docSnap.exists()) {
+          const initialData = {
+            tasks: [],
+            createdAt: new Date(),
+          };
+          return from(setDoc(userDocRef, initialData));
+        }
+        return of();
+      }),
+      mergeMap(() => {
+        const tasksCollection = collection(
+          this.firestore,
+          `users/${userId}/tasks`,
+        ) as CollectionReference;
+        console.log({ task, tasksCollection });
+        return from(addDoc(tasksCollection, task));
+      }),
+    );
   }
 
   updateTask(
@@ -49,7 +83,7 @@ export class TasksService {
     updatedFields: Partial<Task>,
   ): Observable<void[]> {
     const updateTasks$ = taskIds.map((taskId) =>
-      from(this.updateTask(userId, taskId, updatedFields)),
+      this.updateTask(userId, taskId, updatedFields),
     );
 
     return forkJoin(updateTasks$);

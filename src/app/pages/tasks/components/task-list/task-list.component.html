@@ -1,0 +1,9 @@
+@if ({ v: tasks$ | async }; as tasks) {
+  @for (task of tasks.v; track task.id) {
+    <nskr-task-item [task]="task"></nskr-task-item>
+  }
+
+  @if (!tasks.v || tasks.v.length === 0) {
+    <p class="text">There is no tasks for this user</p>
+  }
+}

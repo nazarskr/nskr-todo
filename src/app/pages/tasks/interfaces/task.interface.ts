@@ -2,6 +2,7 @@ import { Priority, Status } from '../enums';
 
 export interface Task {
   id: string;
+  checkMark?: boolean;
   description: string;
   dueDate: Date | null;
   creationDate: Date;

@@ -26,19 +26,17 @@ import { MatDivider } from '@angular/material/divider';
   styleUrl: './user.component.scss',
 })
 export class UserComponent {
-  private _authService = inject(AuthService);
-  private _toasterService = inject(ToasterService);
-  private _router = inject(Router);
+  private authService = inject(AuthService);
+  private toasterService = inject(ToasterService);
+  private router = inject(Router);
 
-  currentUser$ = this._authService.currentUser$.pipe(
-    map((user) => user?.email),
-  );
+  currentUser$ = this.authService.currentUser$.pipe(map((user) => user?.email));
 
   email = 'somelongemail@gmail.com';
   logout(): void {
-    this._authService.logout().then(() => {
-      this._toasterService.showWarningMessage('User logged out');
-      this._router.navigate(['/auth']);
+    this.authService.logout().then(() => {
+      this.toasterService.showWarningMessage('User logged out');
+      this.router.navigate(['/auth']);
     });
   }
 }
