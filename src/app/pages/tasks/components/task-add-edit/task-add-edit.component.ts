@@ -53,7 +53,7 @@ export class TaskAddEditComponent implements OnInit {
     dueDate: [
       this.data?.dueDate || null,
       {
-        validators: [dueDateValidator()],
+        validators: [Validators.required, dueDateValidator()],
         updateOn: 'blur',
       },
     ],

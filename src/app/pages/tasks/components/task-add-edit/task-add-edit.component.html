@@ -32,6 +32,9 @@
         [for]="dueDatePicker"
       ></mat-datepicker-toggle>
       <mat-datepicker #dueDatePicker></mat-datepicker>
+      @if (taskForm.get("dueDate")?.hasError("required")) {
+        <mat-error>Due date is required</mat-error>
+      }
       @if (
         taskForm.get("dueDate")?.hasError("pastDate") &&
         taskForm.get("dueDate")?.touched
