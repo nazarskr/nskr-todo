@@ -1,0 +1,810 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>nskr-todo documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">nskr-todo documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  TaskAddEditComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/pages/tasks/components/task-add-edit/task-add-edit.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>nskr-task-add-edit</code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>ReactiveFormsModule</code>
+                            <code>MatFormFieldModule</code>
+                            <code>MatDatepickerModule</code>
+                            <code>MatDialogModule</code>
+                            <code>MatInput</code>
+                            <code>MatSelect</code>
+                            <code>MatOption</code>
+                            <code>MatIcon</code>
+                            <code>MatMiniFabButton</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./task-add-edit.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./task-add-edit.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#data" >data</a>
+                            </li>
+                            <li>
+                                <a href="#dialogRef" >dialogRef</a>
+                            </li>
+                            <li>
+                                <a href="#fb" >fb</a>
+                            </li>
+                            <li>
+                                <a href="#priorities" >priorities</a>
+                            </li>
+                            <li>
+                                <a href="#statuses" >statuses</a>
+                            </li>
+                            <li>
+                                <a href="#taskForm" >taskForm</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onSave" >onSave</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="71"
+                                    class="link-to-prism">src/app/pages/tasks/components/task-add-edit/task-add-edit.component.ts:71</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSave"></a>
+                    <span class="name">
+                        <span ><b>onSave</b></span>
+                        <a href="#onSave"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSave()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="81"
+                                    class="link-to-prism">src/app/pages/tasks/components/task-add-edit/task-add-edit.component.ts:81</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="data"></a>
+                    <span class="name">
+                        <span ><b>data</b></span>
+                        <a href="#data"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(MAT_DIALOG_DATA)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/pages/tasks/components/task-add-edit/task-add-edit.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dialogRef"></a>
+                    <span class="name">
+                        <span ><b>dialogRef</b></span>
+                        <a href="#dialogRef"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(MatDialogRef&lt;TaskAddEditComponent&gt;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/pages/tasks/components/task-add-edit/task-add-edit.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fb"></a>
+                    <span class="name">
+                        <span ><b>fb</b></span>
+                        <a href="#fb"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/pages/tasks/components/task-add-edit/task-add-edit.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="priorities"></a>
+                    <span class="name">
+                        <span ><b>priorities</b></span>
+                        <a href="#priorities"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>priorityMap()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/pages/tasks/components/task-add-edit/task-add-edit.component.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="statuses"></a>
+                    <span class="name">
+                        <span ><b>statuses</b></span>
+                        <a href="#statuses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>Object.values(Status)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/pages/tasks/components/task-add-edit/task-add-edit.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="taskForm"></a>
+                    <span class="name">
+                        <span ><b>taskForm</b></span>
+                        <a href="#taskForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.fb.group({
+    description: [
+      this.data?.description || &#x27;&#x27;,
+      [Validators.required, Validators.maxLength(200), xssValidator()],
+    ],
+    dueDate: [
+      this.data?.dueDate || null,
+      {
+        validators: [dueDateValidator()],
+        updateOn: &#x27;blur&#x27;,
+      },
+    ],
+    creationDate: [
+      { value: this.data?.creationDate || new Date(), disabled: true }, // Заблоковане поле
+      Validators.required,
+    ],
+    completionDate: [
+      { value: this.data?.completionDate || null, disabled: true }, // Заблоковане поле
+    ],
+    status: [this.data?.status || Status.TODO, Validators.required],
+    priority: [this.data?.priority || Priority.LOW, Validators.required],
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/pages/tasks/components/task-add-edit/task-add-edit.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from &#x27;@angular/core&#x27;;
+import {
+  MAT_DIALOG_DATA,
+  MatDialogModule,
+  MatDialogRef,
+} from &#x27;@angular/material/dialog&#x27;;
+import { FormBuilder, ReactiveFormsModule, Validators } from &#x27;@angular/forms&#x27;;
+import { Priority, Status } from &#x27;../../enums&#x27;;
+import { MatFormFieldModule } from &#x27;@angular/material/form-field&#x27;;
+import { MatInput } from &#x27;@angular/material/input&#x27;;
+import { MatDatepickerModule } from &#x27;@angular/material/datepicker&#x27;;
+import { MatOption, MatSelect } from &#x27;@angular/material/select&#x27;;
+import { MatIcon } from &#x27;@angular/material/icon&#x27;;
+import { MatMiniFabButton } from &#x27;@angular/material/button&#x27;;
+import { dueDateValidator, xssValidator } from &#x27;@shared/validators&#x27;;
+import { priorityMap } from &#x27;../../utils/priority-map&#x27;;
+
+@Component({
+  selector: &#x27;nskr-task-add-edit&#x27;,
+  imports: [
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatInput,
+    MatSelect,
+    MatOption,
+    MatIcon,
+    MatMiniFabButton,
+  ],
+  templateUrl: &#x27;./task-add-edit.component.html&#x27;,
+  styleUrl: &#x27;./task-add-edit.component.scss&#x27;,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class TaskAddEditComponent implements OnInit {
+  data &#x3D; inject(MAT_DIALOG_DATA);
+  dialogRef &#x3D; inject(MatDialogRef&lt;TaskAddEditComponent&gt;);
+  fb &#x3D; inject(FormBuilder);
+
+  statuses &#x3D; Object.values(Status);
+  priorities &#x3D; priorityMap();
+
+  taskForm &#x3D; this.fb.group({
+    description: [
+      this.data?.description || &#x27;&#x27;,
+      [Validators.required, Validators.maxLength(200), xssValidator()],
+    ],
+    dueDate: [
+      this.data?.dueDate || null,
+      {
+        validators: [dueDateValidator()],
+        updateOn: &#x27;blur&#x27;,
+      },
+    ],
+    creationDate: [
+      { value: this.data?.creationDate || new Date(), disabled: true }, // Заблоковане поле
+      Validators.required,
+    ],
+    completionDate: [
+      { value: this.data?.completionDate || null, disabled: true }, // Заблоковане поле
+    ],
+    status: [this.data?.status || Status.TODO, Validators.required],
+    priority: [this.data?.priority || Priority.LOW, Validators.required],
+  });
+
+  ngOnInit() {
+    this.taskForm.get(&#x27;status&#x27;)?.valueChanges.subscribe((status: Status) &#x3D;&gt; {
+      if (status &#x3D;&#x3D;&#x3D; Status.DONE) {
+        this.taskForm.get(&#x27;completionDate&#x27;)?.setValue(new Date());
+      } else {
+        this.taskForm.get(&#x27;completionDate&#x27;)?.setValue(null);
+      }
+    });
+  }
+
+  onSave() {
+    if (this.taskForm.valid) {
+      this.dialogRef.close(this.taskForm.getRawValue());
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;h2 mat-dialog-title&gt;{{ data ? &quot;Edit Task&quot; : &quot;Add Task&quot; }}&lt;/h2&gt;
+
+&lt;form [formGroup]&#x3D;&quot;taskForm&quot; (ngSubmit)&#x3D;&quot;onSave()&quot;&gt;
+  &lt;mat-dialog-content class&#x3D;&quot;dialog-content&quot;&gt;
+    &lt;mat-form-field appearance&#x3D;&quot;fill&quot; class&#x3D;&quot;full-width&quot;&gt;
+      &lt;mat-label&gt;Description&lt;/mat-label&gt;
+      &lt;input
+        matInput
+        formControlName&#x3D;&quot;description&quot;
+        placeholder&#x3D;&quot;Enter description&quot;
+      /&gt;
+      @if (taskForm.get(&quot;description&quot;)?.hasError(&quot;required&quot;)) {
+        &lt;mat-error&gt;Description is required&lt;/mat-error&gt;
+      }
+      @if (taskForm.get(&quot;description&quot;)?.hasError(&quot;maxlength&quot;)) {
+        &lt;mat-error&gt;Description cannot exceed 200 characters&lt;/mat-error&gt;
+      }
+      @if (taskForm.get(&quot;description&quot;)?.hasError(&quot;xssDetected&quot;)) {
+        &lt;mat-error&gt;Invalid characters detected&lt;/mat-error&gt;
+      }
+    &lt;/mat-form-field&gt;
+
+    &lt;mat-form-field appearance&#x3D;&quot;fill&quot; class&#x3D;&quot;full-width&quot;&gt;
+      &lt;mat-label&gt;Due Date&lt;/mat-label&gt;
+      &lt;input
+        matInput
+        [matDatepicker]&#x3D;&quot;dueDatePicker&quot;
+        formControlName&#x3D;&quot;dueDate&quot;
+      /&gt;
+      &lt;mat-datepicker-toggle
+        matSuffix
+        [for]&#x3D;&quot;dueDatePicker&quot;
+      &gt;&lt;/mat-datepicker-toggle&gt;
+      &lt;mat-datepicker #dueDatePicker&gt;&lt;/mat-datepicker&gt;
+      @if (
+        taskForm.get(&quot;dueDate&quot;)?.hasError(&quot;pastDate&quot;) &amp;&amp;
+        taskForm.get(&quot;dueDate&quot;)?.touched
+      ) {
+        &lt;mat-error&gt;Due date cannot be in the past&lt;/mat-error&gt;
+      }
+    &lt;/mat-form-field&gt;
+
+    &lt;mat-form-field appearance&#x3D;&quot;fill&quot; class&#x3D;&quot;full-width&quot;&gt;
+      &lt;mat-label&gt;Status&lt;/mat-label&gt;
+      &lt;mat-select formControlName&#x3D;&quot;status&quot;&gt;
+        @for (status of statuses; track status) {
+          &lt;mat-option [value]&#x3D;&quot;status&quot;&gt;
+            {{ status }}
+          &lt;/mat-option&gt;
+        }
+      &lt;/mat-select&gt;
+    &lt;/mat-form-field&gt;
+
+    &lt;mat-form-field appearance&#x3D;&quot;fill&quot; class&#x3D;&quot;full-width&quot;&gt;
+      &lt;mat-label&gt;Priority&lt;/mat-label&gt;
+      &lt;mat-select formControlName&#x3D;&quot;priority&quot;&gt;
+        @for (priority of priorities; track priority) {
+          &lt;mat-option [value]&#x3D;&quot;priority.value&quot;&gt;
+            {{ priority.key }}
+          &lt;/mat-option&gt;
+        }
+      &lt;/mat-select&gt;
+    &lt;/mat-form-field&gt;
+  &lt;/mat-dialog-content&gt;
+
+  &lt;mat-dialog-actions align&#x3D;&quot;end&quot;&gt;
+    &lt;button mat-mini-fab aria-label&#x3D;&quot;Close&quot; mat-dialog-close&gt;
+      &lt;mat-icon&gt;close&lt;/mat-icon&gt;
+    &lt;/button&gt;
+    &lt;button mat-mini-fab aria-label&#x3D;&quot;Confirm&quot; (click)&#x3D;&quot;onSave()&quot;&gt;
+      &lt;mat-icon&gt;checkmark&lt;/mat-icon&gt;
+    &lt;/button&gt;
+  &lt;/mat-dialog-actions&gt;
+&lt;/form&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><h2 mat-dialog-title>{{ data ? "Edit Task" : "Add Task" }}</h2><form [formGroup]="taskForm" (ngSubmit)="onSave()">  <mat-dialog-content class="dialog-content">    <mat-form-field appearance="fill" class="full-width">      <mat-label>Description</mat-label>      <input        matInput        formControlName="description"        placeholder="Enter description"      />      @if (taskForm.get("description")?.hasError("required")) {        <mat-error>Description is required</mat-error>      }      @if (taskForm.get("description")?.hasError("maxlength")) {        <mat-error>Description cannot exceed 200 characters</mat-error>      }      @if (taskForm.get("description")?.hasError("xssDetected")) {        <mat-error>Invalid characters detected</mat-error>      }    </mat-form-field>    <mat-form-field appearance="fill" class="full-width">      <mat-label>Due Date</mat-label>      <input        matInput        [matDatepicker]="dueDatePicker"        formControlName="dueDate"      />      <mat-datepicker-toggle        matSuffix        [for]="dueDatePicker"      ></mat-datepicker-toggle>      <mat-datepicker #dueDatePicker></mat-datepicker>      @if (        taskForm.get("dueDate")?.hasError("pastDate") &&        taskForm.get("dueDate")?.touched      ) {        <mat-error>Due date cannot be in the past</mat-error>      }    </mat-form-field>    <mat-form-field appearance="fill" class="full-width">      <mat-label>Status</mat-label>      <mat-select formControlName="status">        @for (status of statuses; track status) {          <mat-option [value]="status">            {{ status }}          </mat-option>        }      </mat-select>    </mat-form-field>    <mat-form-field appearance="fill" class="full-width">      <mat-label>Priority</mat-label>      <mat-select formControlName="priority">        @for (priority of priorities; track priority) {          <mat-option [value]="priority.value">            {{ priority.key }}          </mat-option>        }      </mat-select>    </mat-form-field>  </mat-dialog-content>  <mat-dialog-actions align="end">    <button mat-mini-fab aria-label="Close" mat-dialog-close>      <mat-icon>close</mat-icon>    </button>    <button mat-mini-fab aria-label="Confirm" (click)="onSave()">      <mat-icon>checkmark</mat-icon>    </button>  </mat-dialog-actions></form></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'nskr-root'},{'name': 'LoadingComponent', 'selector': 'nskr-loading'},{'name': 'LoginComponent', 'selector': 'nskr-login'},{'name': 'NotFoundComponent', 'selector': 'nskr-not-found'},{'name': 'TaskAddEditComponent', 'selector': 'nskr-task-add-edit'},{'name': 'TaskDeleteComponent', 'selector': 'nskr-task-delete'},{'name': 'TaskFilterComponent', 'selector': 'nskr-task-filter'},{'name': 'TaskItemComponent', 'selector': 'nskr-task-item'},{'name': 'TaskListComponent', 'selector': 'nskr-task-list'},{'name': 'TasksComponent', 'selector': 'nskr-tasks'},{'name': 'ThemeComponent', 'selector': 'nskr-theme'},{'name': 'UserComponent', 'selector': 'nskr-user'}];
+    var DIRECTIVES = [{'name': 'ColorDirective', 'selector': '[nskrColor]'},{'name': 'PageComponent', 'selector': ''}];
+    var ACTUAL_COMPONENT = {'name': 'TaskAddEditComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'TaskAddEditComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -58,3 +58,11 @@ This will compile your project and store the build artifacts in the `dist/` dire
 
 ## Deploy
 [Deploy pipeline to Firebase Hosting](.github/workflows/firebase-deploy.yml)
+
+## API Documentation
+To update API documentation run:
+
+```
+npm run generate:documentation
+```
+and check [documentation here](documentation)

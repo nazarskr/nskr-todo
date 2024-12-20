@@ -9,7 +9,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "prepare": "husky"
+    "prepare": "husky",
+    "generate:documentation": "compodoc -p tsconfig.json"
   },
   "private": true,
   "dependencies": {
@@ -36,6 +37,7 @@
     "@angular-devkit/build-angular": "^19.0.0",
     "@angular/cli": "^19.0.0",
     "@angular/compiler-cli": "^19.0.0",
+    "@compodoc/compodoc": "^1.1.26",
     "@ngrx/schematics": "^19.0.0",
     "@types/firebase": "^3.2.3",
     "@types/jasmine": "~5.1.0",
@@ -58,6 +60,8 @@
       "eslint --fix",
       "prettier --write"
     ],
-    "**/*.{html,css,scss}": "prettier --write"
+    "**/*.{html,css,scss}": [
+      "prettier --write"
+    ]
   }
 }
