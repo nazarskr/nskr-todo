@@ -1,0 +1,32 @@
+@use "mixins";
+
+:host {
+  --mat-form-field-container-vertical-padding: 0;
+}
+
+.filter-section {
+  @include mixins.simple-form-section();
+}
+
+.compact-form-field,
+.compact-checkbox {
+  min-width: 150px;
+  max-width: 200px;
+  margin: 0;
+}
+
+.search-field {
+  flex: 1;
+}
+
+.mat-form-field {
+  margin: 0;
+}
+
+.mat-checkbox {
+  margin-right: 1rem;
+}
+
+.mat-form-field-wrapper {
+  padding-bottom: 0;
+}

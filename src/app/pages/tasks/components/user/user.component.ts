@@ -1,4 +1,9 @@
-import { Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import {
   MatCard,
   MatCardActions,
@@ -8,31 +13,27 @@ import { MatButton } from '@angular/material/button';
 import { AuthService } from '@core/services/auth.service';
 import { ToasterService } from '@shared/services/toaster.service';
 import { Router } from '@angular/router';
-import { map } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
 import { MatDivider } from '@angular/material/divider';
+import { User } from 'firebase/auth';
 
 @Component({
   selector: 'nskr-user',
-  imports: [
-    MatCard,
-    MatCardContent,
-    MatCardActions,
-    MatButton,
-    AsyncPipe,
-    MatDivider,
-  ],
+  imports: [MatCard, MatCardContent, MatCardActions, MatButton, MatDivider],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserComponent {
+export class UserComponent implements OnInit {
   private authService = inject(AuthService);
   private toasterService = inject(ToasterService);
   private router = inject(Router);
 
-  currentUser$ = this.authService.currentUser$.pipe(map((user) => user?.email));
+  currentUser!: User | null;
 
-  email = 'somelongemail@gmail.com';
+  ngOnInit() {
+    this.currentUser = this.authService.getCurrentUser();
+  }
+
   logout(): void {
     this.authService.logout().then(() => {
       this.toasterService.showWarningMessage('User logged out');

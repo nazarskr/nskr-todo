@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import { appStore } from './store';
 import { appFirebaseConfig } from './firebase.config';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,5 +14,6 @@ export const appConfig: ApplicationConfig = {
     ...appStore,
     ...appFirebaseConfig,
     provideAnimationsAsync(),
+    provideNativeDateAdapter(),
   ],
 };

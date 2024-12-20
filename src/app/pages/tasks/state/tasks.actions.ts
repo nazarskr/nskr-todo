@@ -1,10 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { Task, Filters } from '../interfaces';
 
-export const loadTasks = createAction(
-  '[Tasks] Load Tasks',
-  props<{ userId: string }>(),
-);
+export const loadTasks = createAction('[Tasks] Load Tasks');
 export const loadTasksSuccess = createAction(
   '[Tasks] Load Tasks Success',
   props<{ tasks: Task[] }>(),
@@ -16,7 +13,7 @@ export const loadTasksFailure = createAction(
 
 export const createTask = createAction(
   '[Tasks] Create Task',
-  props<{ userId: string; task: Task }>(),
+  props<{ task: Task }>(),
 );
 export const createTaskSuccess = createAction(
   '[Tasks] Create Task Success',
@@ -29,7 +26,7 @@ export const createTaskFailure = createAction(
 
 export const updateTask = createAction(
   '[Tasks] Update Task',
-  props<{ userId: string; taskId: string; updatedTask: Partial<Task> }>(),
+  props<{ taskId: string; updatedTask: Partial<Task> }>(),
 );
 export const updateTaskSuccess = createAction(
   '[Tasks] Update Task Success',
@@ -42,7 +39,7 @@ export const updateTaskFailure = createAction(
 
 export const deleteTask = createAction(
   '[Tasks] Delete Task',
-  props<{ userId: string; taskId: string }>(),
+  props<{ taskId: string }>(),
 );
 export const deleteTaskSuccess = createAction(
   '[Tasks] Delete Task Success',
@@ -55,7 +52,7 @@ export const deleteTaskFailure = createAction(
 
 export const bulkUpdateTasks = createAction(
   '[Tasks] Bulk Update Tasks',
-  props<{ userId: string; taskIds: string[]; updatedFields: Partial<Task> }>(),
+  props<{ taskIds: string[]; updatedFields: Partial<Task> }>(),
 );
 export const bulkUpdateTasksSuccess = createAction(
   '[Tasks] Bulk Update Tasks Success',

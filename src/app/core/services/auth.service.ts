@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
 import {
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
   signOut,
-  onAuthStateChanged,
   User,
 } from 'firebase/auth';
 
@@ -14,16 +12,9 @@ import {
 })
 export class AuthService {
   private auth = getAuth();
-  private userSubject = new BehaviorSubject<User | null>(null);
 
-  constructor() {
-    onAuthStateChanged(this.auth, (user) => {
-      this.userSubject.next(user);
-    });
-  }
-
-  get currentUser$(): Observable<User | null> {
-    return this.userSubject.asObservable();
+  getCurrentUser(): User | null {
+    return this.auth.currentUser;
   }
 
   async loginWithGoogle(): Promise<void> {

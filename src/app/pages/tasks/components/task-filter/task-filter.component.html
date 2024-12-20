@@ -1,1 +1,57 @@
-<p>task-filter works!</p>
+<form class="task-filter" [formGroup]="filterForm">
+  <div class="filter-section">
+    <mat-form-field>
+      <mat-label>Sort By:</mat-label>
+      <mat-select id="sortBy" formControlName="sortBy">
+        @for (sortProp of sortBy; track sortProp) {
+          <mat-option [value]="sortProp">{{ sortProp }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Sort direction:</mat-label>
+      <mat-select id="sortDirection" formControlName="sortDirection">
+        @for (sortDirection of sortDirections; track sortDirection) {
+          <mat-option [value]="sortDirection">{{ sortDirection }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="filter-section">
+    <mat-form-field>
+      <mat-label>Status:</mat-label>
+      <mat-select id="status" formControlName="status">
+        @for (status of statuses; track status) {
+          <mat-option [value]="status">{{ status }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Priority:</mat-label>
+      <mat-select id="priority" formControlName="status">
+        @for (priority of priorities; track priority) {
+          <mat-option [value]="priority">{{ priority }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Search:</mat-label>
+      <input
+        matInput
+        id="search-query"
+        type="text"
+        placeholder="Search tasks..."
+        formControlName="searchQuery"
+      />
+    </mat-form-field>
+  </div>
+
+  <div class="filter-section">
+    <mat-checkbox>Select all</mat-checkbox>
+    <button mat-raised-button (click)="clearFilters()">Clear</button>
+  </div>
+</form>

@@ -12,8 +12,8 @@ export class TasksEffects {
   loadTasks$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TasksActions.loadTasks),
-      mergeMap(({ userId }) =>
-        this.tasksService.getTasksForUser(userId).pipe(
+      mergeMap(() =>
+        this.tasksService.getTasksForUser().pipe(
           map((tasks) => TasksActions.loadTasksSuccess({ tasks })),
           catchError((error) =>
             of(TasksActions.loadTasksFailure({ error: error.message })),
@@ -26,8 +26,8 @@ export class TasksEffects {
   createTask$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TasksActions.createTask),
-      mergeMap(({ userId, task }) =>
-        this.tasksService.createTask(userId, task).pipe(
+      mergeMap(({ task }) =>
+        this.tasksService.createTask(task).pipe(
           map(() => TasksActions.createTaskSuccess({ task })),
           catchError((error) =>
             of(TasksActions.createTaskFailure({ error: error.message })),
@@ -40,8 +40,8 @@ export class TasksEffects {
   updateTask$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TasksActions.updateTask),
-      mergeMap(({ userId, taskId, updatedTask }) =>
-        this.tasksService.updateTask(userId, taskId, updatedTask).pipe(
+      mergeMap(({ taskId, updatedTask }) =>
+        this.tasksService.updateTask(taskId, updatedTask).pipe(
           map(() => TasksActions.updateTaskSuccess({ taskId, updatedTask })),
           catchError((error) =>
             of(TasksActions.updateTaskFailure({ error: error.message })),
@@ -54,8 +54,8 @@ export class TasksEffects {
   deleteTask$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TasksActions.deleteTask),
-      mergeMap(({ userId, taskId }) =>
-        this.tasksService.deleteTask(userId, taskId).pipe(
+      mergeMap(({ taskId }) =>
+        this.tasksService.deleteTask(taskId).pipe(
           map(() => TasksActions.deleteTaskSuccess({ taskId })),
           catchError((error) =>
             of(TasksActions.deleteTaskFailure({ error: error.message })),
@@ -68,8 +68,8 @@ export class TasksEffects {
   bulkUpdateTasks$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TasksActions.bulkUpdateTasks),
-      mergeMap(({ userId, taskIds, updatedFields }) =>
-        this.tasksService.bulkUpdate(userId, taskIds, updatedFields).pipe(
+      mergeMap(({ taskIds, updatedFields }) =>
+        this.tasksService.bulkUpdate(taskIds, updatedFields).pipe(
           map(() =>
             TasksActions.bulkUpdateTasksSuccess({ taskIds, updatedFields }),
           ),
@@ -78,6 +78,18 @@ export class TasksEffects {
           ),
         ),
       ),
+    ),
+  );
+
+  reloadTasksAfterActions$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(
+        TasksActions.createTaskSuccess,
+        TasksActions.updateTaskSuccess,
+        TasksActions.deleteTaskSuccess,
+        TasksActions.bulkUpdateTasksSuccess,
+      ),
+      map(() => TasksActions.loadTasks()),
     ),
   );
 }

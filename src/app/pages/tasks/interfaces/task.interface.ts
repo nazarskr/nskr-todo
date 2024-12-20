@@ -1,12 +1,13 @@
 import { Priority, Status } from '../enums';
+import { Timestamp } from 'firebase/firestore';
 
 export interface Task {
   id: string;
   checkMark?: boolean;
   description: string;
-  dueDate: Date | null;
-  creationDate: Date;
+  dueDate: Date | Timestamp;
+  creationDate: Date | Timestamp;
   status: Status;
-  completionDate: Date | null;
+  completionDate: Date | Timestamp | null;
   priority: Priority;
 }

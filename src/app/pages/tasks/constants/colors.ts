@@ -2,9 +2,9 @@ import { Priority } from '../enums';
 import { Status } from '../enums';
 
 export const priorityColors: Record<Priority, string> = {
-  [Priority.LOW]: 'lightgreen',
-  [Priority.MEDIUM]: 'lightyellow',
-  [Priority.HIGH]: 'lightcoral',
+  [Priority.LOW]: '#4caf50',
+  [Priority.MEDIUM]: '#ff9800',
+  [Priority.HIGH]: '#f44336',
 };
 
 export const statusColors: Record<Status, string> = {

@@ -20,3 +20,20 @@
   flex-direction: column;
   align-items: center;
 }
+
+@mixin flex-row-space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin simple-form {
+  @include flex-row-center();
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+@mixin simple-form-section {
+  @include simple-form();
+  flex-wrap: nowrap;
+}

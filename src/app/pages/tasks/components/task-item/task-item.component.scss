@@ -1,0 +1,61 @@
+@use "mixins";
+
+:host {
+  display: block;
+}
+
+mat-card {
+  width: 100%;
+  margin: 20px 0;
+}
+
+mat-card-header {
+  width: 100%;
+}
+
+mat-card-title {
+  span {
+    display: inline-block;
+    margin-right: 8px;
+  }
+}
+
+mat-card-header,
+mat-card-content {
+  @include mixins.flex-row-space-between();
+  padding-bottom: 25px;
+}
+
+mat-card-content {
+  padding-bottom: 25px;
+  .left {
+    padding-left: 25px;
+  }
+}
+
+mat-card-footer {
+  padding: 0 15px 10px 5px;
+  @include mixins.flex-row-space-between();
+}
+
+.status {
+  padding: 5px 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 25px;
+}
+
+.priority {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+button {
+  margin-left: 10px;
+}
+
+.description {
+  padding-bottom: 20px;
+}

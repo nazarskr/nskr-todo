@@ -34,7 +34,15 @@ body {
     }
 
     .text {
-      color: colors.$text-dark;
+      color: colors.$text-light;
+    }
+
+    .text-2 {
+      color: colors.$text-light-2;
+    }
+
+    .text-3 {
+      color: colors.$text-light-3;
     }
   }
 }
@@ -46,7 +54,19 @@ body {
 }
 
 .text {
-  color: colors.$text-light;
+  color: colors.$text-dark;
+}
+
+.text-2 {
+  color: colors.$text-dark-2;
+}
+
+.text-3 {
+  color: colors.$text-dark-3;
+}
+
+.text-center {
+  text-align: center;
 }
 
 .message-success {
