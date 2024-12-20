@@ -92,7 +92,7 @@ export const tasksReducer = createReducer(
         ...(sortBy !== undefined ? { sortBy } : {}),
         ...(sortDirection !== undefined ? { sortDirection } : {}),
         ...(status !== undefined ? { status } : {}),
-        ...(priority !== undefined ? { searchQuery } : {}),
+        ...(priority !== undefined ? { priority } : {}),
         ...(searchQuery !== undefined ? { searchQuery } : {}),
       },
     }),

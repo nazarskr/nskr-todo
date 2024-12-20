@@ -2,7 +2,6 @@
 
 :host {
   @include mixins.flex-column-only-center();
-  padding-top: 200px;
 }
 
 button {
