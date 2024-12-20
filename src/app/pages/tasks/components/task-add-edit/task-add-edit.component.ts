@@ -25,6 +25,7 @@ import { MatOption, MatSelect } from '@angular/material/select';
 import { MatIcon } from '@angular/material/icon';
 import { MatMiniFabButton } from '@angular/material/button';
 import { dueDateValidator, xssValidator } from '@shared/validators';
+import { priorityMap } from '../utils/priority-map';
 
 @Component({
   selector: 'nskr-task-add-edit',
@@ -54,7 +55,7 @@ export class TaskAddEditComponent implements OnInit {
   fb = inject(FormBuilder);
 
   statuses = Object.values(Status);
-  priorities = Object.keys(Priority);
+  priorities = priorityMap();
 
   taskForm = this.fb.group({
     description: [

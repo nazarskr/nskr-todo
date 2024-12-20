@@ -28,16 +28,15 @@ export const selectFilteredAndSortedTasks = createSelector(
   selectTasksState,
   selectFilters,
   (state: TasksState, filters: Filters) => {
-    let filteredTasks = [...state.tasks];
+    let filteredTasks: Task[] = [...state.tasks];
 
-    filteredTasks.sort((a: Task, b: Task) => {
+    filteredTasks.sort((a, b) => {
       const direction = filters.sortDirection === 'asc' ? 1 : -1;
 
-      // TODO fix
-      // if (a[filters.sortBy] < b[filters.sortBy]) return -1 * direction;
-      // if (a[filters.sortBy] > b[filters.sortBy]) return 1 * direction;
-      if (a['creationDate'] < b['creationDate']) return -1 * direction;
-      if (a['creationDate'] > b['creationDate']) return 1 * direction;
+      // @ts-expect-error null or undefined?
+      if (a[filters.sortBy] < b[filters.sortBy]) return -1 * direction;
+      // @ts-expect-error null or undefined?
+      if (a[filters.sortBy] > b[filters.sortBy]) return 1 * direction;
       return 0;
     });
 
@@ -47,14 +46,37 @@ export const selectFilteredAndSortedTasks = createSelector(
       );
     }
 
-    if (filters.searchQuery) {
-      filteredTasks = filteredTasks.filter((task) =>
-        task.description
-          .toLowerCase()
-          .includes(filters.searchQuery.toLowerCase()),
+    if (filters.priority !== 'all') {
+      filteredTasks = filteredTasks.filter(
+        (task) => task.priority === filters.priority,
       );
     }
 
+    filteredTasks = filteredTasks.filter((task) =>
+      task.description
+        .toLowerCase()
+        .includes(filters.searchQuery.toLowerCase()),
+    );
+
     return filteredTasks;
   },
+);
+
+export const selectAreAllTasksSelected = createSelector(
+  selectFilteredAndSortedTasks,
+  (tasks) => tasks.length > 0 && tasks.every((task) => task.checkMark),
+);
+
+export const selectAreSomeTasksSelected = createSelector(
+  selectFilteredAndSortedTasks,
+  (tasks) => {
+    const totalTasks = tasks.length;
+    const selectedTasks = tasks.filter((task) => task.checkMark).length;
+    return selectedTasks > 0 && selectedTasks < totalTasks;
+  },
+);
+
+export const selectSelectedTasks = createSelector(
+  selectFilteredAndSortedTasks,
+  (tasks) => tasks.filter((task) => task.checkMark),
 );

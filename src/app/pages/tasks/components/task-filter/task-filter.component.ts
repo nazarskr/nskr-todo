@@ -1,15 +1,26 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { Priority, SortDirection, Status } from '../../enums';
+import { SortDirection, Status } from '../../enums';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { Subscription, throttleTime } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { clearFilters, setFilters } from '../../state/tasks.actions';
+import {
+  clearFilters,
+  selectAllTasks,
+  setFilters,
+} from '../../state/tasks.actions';
 import { Filters } from '../../interfaces';
 import { MatButton } from '@angular/material/button';
+import {
+  selectAreAllTasksSelected,
+  selectAreSomeTasksSelected,
+  selectSelectedTasks,
+} from '../../state/tasks.selectors';
+import { AsyncPipe } from '@angular/common';
+import { priorityMap } from '../utils/priority-map';
 
 @Component({
   selector: 'nskr-task-filter',
@@ -23,6 +34,7 @@ import { MatButton } from '@angular/material/button';
     MatOption,
     MatCheckbox,
     MatButton,
+    AsyncPipe,
   ],
 })
 export class TaskFilterComponent implements OnInit, OnDestroy {
@@ -30,7 +42,7 @@ export class TaskFilterComponent implements OnInit, OnDestroy {
   private store = inject(Store);
 
   statuses = ['all', ...Object.values(Status)];
-  priorities = ['all', ...Object.keys(Priority)];
+  priorities = priorityMap();
   sortDirections = Object.values(SortDirection);
   sortBy = ['creationDate', 'dueDate', 'priority', 'status'];
   initFormState = {
@@ -46,6 +58,9 @@ export class TaskFilterComponent implements OnInit, OnDestroy {
   });
 
   filtersSub$!: Subscription;
+  areAllTasksSelected$ = this.store.select(selectAreAllTasksSelected);
+  areSomeTasksSelected$ = this.store.select(selectAreSomeTasksSelected);
+  selectedTasks$ = this.store.select(selectSelectedTasks);
 
   ngOnInit() {
     this.filtersSub$ = this.filterForm.valueChanges
@@ -53,6 +68,10 @@ export class TaskFilterComponent implements OnInit, OnDestroy {
       .subscribe((filters) => {
         this.store.dispatch(setFilters(filters as Filters));
       });
+  }
+
+  toggleSelectAll(selected: boolean) {
+    this.store.dispatch(selectAllTasks({ selected }));
   }
 
   clearFilters() {

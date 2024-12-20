@@ -32,8 +32,9 @@
     <mat-form-field>
       <mat-label>Priority:</mat-label>
       <mat-select id="priority" formControlName="status">
+        <mat-option [value]="'all'">all</mat-option>
         @for (priority of priorities; track priority) {
-          <mat-option [value]="priority">{{ priority }}</mat-option>
+          <mat-option [value]="priority.value">{{ priority.key }}</mat-option>
         }
       </mat-select>
     </mat-form-field>
@@ -51,7 +52,18 @@
   </div>
 
   <div class="filter-section">
-    <mat-checkbox>Select all</mat-checkbox>
-    <button mat-raised-button (click)="clearFilters()">Clear</button>
+    <mat-checkbox
+      [checked]="areAllTasksSelected$ | async"
+      [indeterminate]="areSomeTasksSelected$ | async"
+      (change)="toggleSelectAll($event.checked)"
+    >
+      Select all
+    </mat-checkbox>
+    @if ((selectedTasks$ | async)?.length || 0 > 0) {
+      <button mat-raised-button (click)="clearFilters()">
+        Mark selected as Done
+      </button>
+    }
+    <button mat-raised-button (click)="clearFilters()">Clear filters</button>
   </div>
 </form>

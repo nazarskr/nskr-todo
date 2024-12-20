@@ -66,3 +66,8 @@ export const bulkUpdateTasksFailure = createAction(
 export const setFilters = createAction('[Tasks] Set Filters', props<Filters>());
 
 export const clearFilters = createAction('[Tasks] Clear Filters');
+
+export const selectAllTasks = createAction(
+  '[Tasks] Select All Tasks',
+  props<{ selected: boolean }>(),
+);

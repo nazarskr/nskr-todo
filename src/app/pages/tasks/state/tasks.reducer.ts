@@ -97,9 +97,17 @@ export const tasksReducer = createReducer(
       },
     }),
   ),
-  // Очищення фільтрів
+
   on(TasksActions.clearFilters, (state) => ({
     ...state,
     filters: initialTasksState.filters,
+  })),
+
+  on(TasksActions.selectAllTasks, (state, { selected }) => ({
+    ...state,
+    tasks: state.tasks.map((task) => ({
+      ...task,
+      checkMark: selected,
+    })),
   })),
 );
