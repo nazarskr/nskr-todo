@@ -44,7 +44,6 @@ export class TasksService {
           const tasks: Task[] = [];
           querySnapshot.forEach((docSnap) => {
             const snapshot = docSnap.data() as Task;
-            console.log(snapshot.dueDate);
             tasks.push({
               ...snapshot,
               id: docSnap.id,

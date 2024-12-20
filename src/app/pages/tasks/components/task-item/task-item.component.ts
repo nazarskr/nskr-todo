@@ -12,11 +12,14 @@ import { MatIcon } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { TaskAddEditComponent } from '../task-add-edit/task-add-edit.component';
 import { Store } from '@ngrx/store';
-import { updateTask, deleteTask } from '../../state/tasks.actions';
+import {
+  updateTask,
+  deleteTask,
+  toggleTaskSelection,
+} from '../../state/tasks.actions';
 import { TaskDeleteComponent } from '../task-delete/task-delete.component';
 import { DatePipe } from '@angular/common';
 import { MatCheckbox } from '@angular/material/checkbox';
-import { FormsModule } from '@angular/forms';
 import { ToDatePipe } from '@shared/pipes/to-date.pipe';
 
 @Component({
@@ -28,7 +31,6 @@ import { ToDatePipe } from '@shared/pipes/to-date.pipe';
     MatMiniFabButton,
     DatePipe,
     MatCheckbox,
-    FormsModule,
     ToDatePipe,
   ],
   templateUrl: './task-item.component.html',
@@ -40,6 +42,12 @@ export class TaskItemComponent {
   private store: Store = inject(Store);
 
   @Input() task!: Task;
+
+  toggleTaskSelection(value: boolean) {
+    this.store.dispatch(
+      toggleTaskSelection({ id: this.task.id, selected: value }),
+    );
+  }
 
   openEditTaskDialog(): void {
     const dialogRef = this.dialog.open(TaskAddEditComponent, {

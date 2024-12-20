@@ -16,7 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
         position: fixed;
         top: 15px;
         left: 15px;
-        z-index: 1000;
+        z-index: 10;
       }
     `,
   ],

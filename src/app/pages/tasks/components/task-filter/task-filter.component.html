@@ -31,7 +31,7 @@
 
     <mat-form-field>
       <mat-label>Priority:</mat-label>
-      <mat-select id="priority" formControlName="status">
+      <mat-select id="priority" formControlName="priority">
         <mat-option [value]="'all'">all</mat-option>
         @for (priority of priorities; track priority) {
           <mat-option [value]="priority.value">{{ priority.key }}</mat-option>
@@ -60,9 +60,12 @@
       Select all
     </mat-checkbox>
     @if ((selectedTasks$ | async)?.length || 0 > 0) {
-      <button mat-raised-button (click)="clearFilters()">
+      <button mat-button [matMenuTriggerFor]="menu">
         Mark selected as Done
       </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="markSelectedAsDone()">Confirm</button>
+      </mat-menu>
     }
     <button mat-raised-button (click)="clearFilters()">Clear filters</button>
   </div>

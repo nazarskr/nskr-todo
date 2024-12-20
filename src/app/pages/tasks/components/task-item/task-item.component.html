@@ -14,14 +14,18 @@
       </p>
       @if (task.completionDate) {
         <p class="text-2">
-          Completion Date{{ task.completionDate | toDate | date: "dd/MM/yyyy" }}
+          Completion Date:
+          {{ task.completionDate | toDate | date: "dd/MM/yyyy" }}
         </p>
       }
     </div>
   </mat-card-content>
   <mat-card-footer>
     <div class="left">
-      <mat-checkbox [(ngModel)]="task.checkMark"></mat-checkbox>
+      <mat-checkbox
+        [checked]="task.checkMark"
+        (change)="toggleTaskSelection($event.checked)"
+      ></mat-checkbox>
     </div>
     <div class="right">
       <button mat-mini-fab aria-label="Edit" (click)="openEditTaskDialog()">

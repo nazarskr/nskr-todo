@@ -5,9 +5,10 @@ import { MatOption, MatSelect } from '@angular/material/select';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { Subscription, throttleTime } from 'rxjs';
+import { Subscription, take, throttleTime } from 'rxjs';
 import { Store } from '@ngrx/store';
 import {
+  bulkUpdateTasks,
   clearFilters,
   selectAllTasks,
   setFilters,
@@ -21,6 +22,8 @@ import {
 } from '../../state/tasks.selectors';
 import { AsyncPipe } from '@angular/common';
 import { priorityMap } from '../utils/priority-map';
+import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
+import { Task } from '../../interfaces';
 
 @Component({
   selector: 'nskr-task-filter',
@@ -35,6 +38,9 @@ import { priorityMap } from '../utils/priority-map';
     MatCheckbox,
     MatButton,
     AsyncPipe,
+    MatMenu,
+    MatMenuItem,
+    MatMenuTrigger,
   ],
 })
 export class TaskFilterComponent implements OnInit, OnDestroy {
@@ -45,6 +51,7 @@ export class TaskFilterComponent implements OnInit, OnDestroy {
   priorities = priorityMap();
   sortDirections = Object.values(SortDirection);
   sortBy = ['creationDate', 'dueDate', 'priority', 'status'];
+
   initFormState = {
     sortBy: 'creationDate',
     sortDirection: this.sortDirections[0],
@@ -52,19 +59,19 @@ export class TaskFilterComponent implements OnInit, OnDestroy {
     priority: 'all',
     searchQuery: '',
   };
-
   filterForm = this.fb.group({
     ...this.initFormState,
   });
 
   filtersSub$!: Subscription;
+
   areAllTasksSelected$ = this.store.select(selectAreAllTasksSelected);
   areSomeTasksSelected$ = this.store.select(selectAreSomeTasksSelected);
   selectedTasks$ = this.store.select(selectSelectedTasks);
 
   ngOnInit() {
     this.filtersSub$ = this.filterForm.valueChanges
-      .pipe(throttleTime(300))
+      .pipe(throttleTime(100))
       .subscribe((filters) => {
         this.store.dispatch(setFilters(filters as Filters));
       });
@@ -72,6 +79,21 @@ export class TaskFilterComponent implements OnInit, OnDestroy {
 
   toggleSelectAll(selected: boolean) {
     this.store.dispatch(selectAllTasks({ selected }));
+  }
+
+  markSelectedAsDone(): void {
+    this.selectedTasks$.pipe(take(1)).subscribe((result: Task[]) => {
+      const taskIds = result.map((task) => task.id);
+      this.store.dispatch(
+        bulkUpdateTasks({
+          taskIds,
+          updatedFields: {
+            status: Status.DONE,
+            completionDate: new Date(),
+          },
+        }),
+      );
+    });
   }
 
   clearFilters() {
