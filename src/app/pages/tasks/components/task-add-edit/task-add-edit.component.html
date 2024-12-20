@@ -1,0 +1,74 @@
+<h2 mat-dialog-title>{{ data ? "Edit Task" : "Add Task" }}</h2>
+
+<form [formGroup]="taskForm" (ngSubmit)="onSave()">
+  <mat-dialog-content class="dialog-content">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Description</mat-label>
+      <input
+        matInput
+        formControlName="description"
+        placeholder="Enter description"
+      />
+      @if (taskForm.get("description")?.hasError("required")) {
+        <mat-error>Description is required</mat-error>
+      }
+      @if (taskForm.get("description")?.hasError("maxlength")) {
+        <mat-error>Description cannot exceed 200 characters</mat-error>
+      }
+      @if (taskForm.get("description")?.hasError("xssDetected")) {
+        <mat-error>Invalid characters detected</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Due Date</mat-label>
+      <input
+        matInput
+        [matDatepicker]="dueDatePicker"
+        formControlName="dueDate"
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="dueDatePicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #dueDatePicker></mat-datepicker>
+      @if (
+        taskForm.get("dueDate")?.hasError("pastDate") &&
+        taskForm.get("dueDate")?.touched
+      ) {
+        <mat-error>Due date cannot be in the past</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        @for (status of statuses; track status) {
+          <mat-option [value]="status">
+            {{ status }}
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Priority</mat-label>
+      <mat-select formControlName="priority">
+        @for (priority of priorities; track priority) {
+          <mat-option [value]="priority.value">
+            {{ priority.key }}
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-mini-fab aria-label="Close" mat-dialog-close>
+      <mat-icon>close</mat-icon>
+    </button>
+    <button mat-mini-fab aria-label="Confirm" (click)="onSave()">
+      <mat-icon>checkmark</mat-icon>
+    </button>
+  </mat-dialog-actions>
+</form>

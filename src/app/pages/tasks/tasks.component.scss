@@ -1,0 +1,9 @@
+@use "mixins";
+
+:host {
+  @include mixins.flex-column-only-center();
+}
+
+button {
+  margin: 20px 0;
+}

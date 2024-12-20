@@ -1,1 +1,90 @@
-/* You can add global styles to this file, and also import other style files */
+@use "colors";
+@use "@angular/material" as mat;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  color-scheme: light;
+  @include mat.theme(
+    (
+      color: mat.$cyan-palette,
+      typography: Roboto,
+      density: 0,
+    )
+  );
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+
+  &.dark-theme {
+    color-scheme: dark;
+
+    .page {
+      background-color: colors.$background-dark;
+    }
+
+    .task-filter {
+      background-color: colors.$background-dark;
+    }
+
+    .text {
+      color: colors.$text-light;
+    }
+
+    .text-2 {
+      color: colors.$text-light-2;
+    }
+
+    .text-3 {
+      color: colors.$text-light-3;
+    }
+  }
+}
+
+.page {
+  display: block;
+  min-height: 100vh;
+  background-color: colors.$background-light;
+}
+
+.task-filter {
+  background-color: colors.$background-light;
+}
+
+.text {
+  color: colors.$text-dark;
+}
+
+.text-2 {
+  color: colors.$text-dark-2;
+}
+
+.text-3 {
+  color: colors.$text-dark-3;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.message-success {
+  background-color: colors.$message-success;
+}
+
+.message-warning {
+  background-color: colors.$message-warning;
+}
+
+.message-error {
+  background-color: colors.$message-error;
+}

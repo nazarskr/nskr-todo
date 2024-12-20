@@ -1,0 +1,39 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>
+      <span class="priority" nskrColor [priority]="task.priority"></span>
+      <span class="text-3">NSKR-{{ task.id }}</span>
+    </mat-card-title>
+    <p class="status" nskrColor [status]="task.status">{{ task.status }}</p>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="left">
+      <p class="text description">{{ task.description }}</p>
+      <p class="text-2">
+        Due Date: {{ task.dueDate | toDate | date: "dd/MM/yyyy" }}
+      </p>
+      @if (task.completionDate) {
+        <p class="text-2">
+          Completion Date:
+          {{ task.completionDate | toDate | date: "dd/MM/yyyy" }}
+        </p>
+      }
+    </div>
+  </mat-card-content>
+  <mat-card-footer>
+    <div class="left">
+      <mat-checkbox
+        [checked]="task.checkMark"
+        (change)="toggleTaskSelection($event.checked)"
+      ></mat-checkbox>
+    </div>
+    <div class="right">
+      <button mat-mini-fab aria-label="Edit" (click)="openEditTaskDialog()">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-mini-fab aria-label="Delete" (click)="openDeleteTaskDialog()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </mat-card-footer>
+</mat-card>

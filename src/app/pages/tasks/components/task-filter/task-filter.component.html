@@ -1,0 +1,72 @@
+<form class="task-filter" [formGroup]="filterForm">
+  <div class="filter-section">
+    <mat-form-field>
+      <mat-label>Sort By:</mat-label>
+      <mat-select id="sortBy" formControlName="sortBy">
+        @for (sortProp of sortBy; track sortProp) {
+          <mat-option [value]="sortProp">{{ sortProp }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Sort direction:</mat-label>
+      <mat-select id="sortDirection" formControlName="sortDirection">
+        @for (sortDirection of sortDirections; track sortDirection) {
+          <mat-option [value]="sortDirection">{{ sortDirection }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="filter-section">
+    <mat-form-field>
+      <mat-label>Status:</mat-label>
+      <mat-select id="status" formControlName="status">
+        @for (status of statuses; track status) {
+          <mat-option [value]="status">{{ status }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Priority:</mat-label>
+      <mat-select id="priority" formControlName="priority">
+        <mat-option [value]="'all'">all</mat-option>
+        @for (priority of priorities; track priority) {
+          <mat-option [value]="priority.value">{{ priority.key }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Search:</mat-label>
+      <input
+        matInput
+        id="search-query"
+        type="text"
+        placeholder="Search tasks..."
+        formControlName="searchQuery"
+      />
+    </mat-form-field>
+  </div>
+
+  <div class="filter-section">
+    <mat-checkbox
+      [checked]="areAllTasksSelected$ | async"
+      [indeterminate]="areSomeTasksSelected$ | async"
+      (change)="toggleSelectAll($event.checked)"
+    >
+      Select all
+    </mat-checkbox>
+    @if ((selectedTasks$ | async)?.length || 0 > 0) {
+      <button mat-button [matMenuTriggerFor]="menu">
+        Mark selected as Done
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="markSelectedAsDone()">Confirm</button>
+      </mat-menu>
+    }
+    <button mat-raised-button (click)="clearFilters()">Clear filters</button>
+  </div>
+</form>

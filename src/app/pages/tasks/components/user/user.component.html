@@ -1,0 +1,9 @@
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <p class="text-2">{{ currentUser?.email }}</p>
+  </mat-card-content>
+  <mat-divider></mat-divider>
+  <mat-card-actions>
+    <button mat-raised-button color="warn" (click)="logout()">Logout</button>
+  </mat-card-actions>
+</mat-card>

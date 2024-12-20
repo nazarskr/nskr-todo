@@ -1,0 +1,9 @@
+@use "mixins";
+
+:host {
+  --mat-form-field-container-vertical-padding: 0;
+}
+
+mat-dialog-content {
+  @include mixins.simple-form();
+}

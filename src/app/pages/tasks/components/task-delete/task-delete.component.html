@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Delete task</h2>
+<mat-dialog-content>
+  Do you really need to delete task with id
+  <span class="text-2">{{ data.id }}</span>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-mini-fab aria-label="Close" mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+  <button mat-mini-fab aria-label="Confirm" (click)="confirmDelete()">
+    <mat-icon>checkmark</mat-icon>
+  </button>
+</mat-dialog-actions>
