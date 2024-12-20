@@ -2,7 +2,3 @@
 <nskr-task-filter></nskr-task-filter>
 <button mat-raised-button (click)="openAddTaskDialog()">Add Task</button>
 <nskr-task-list [tasks$]="tasks$"></nskr-task-list>
-
-@if (loading$ | async) {
-  <nskr-loading></nskr-loading>
-}

@@ -11,9 +11,9 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    ...appStore,
-    ...appFirebaseConfig,
     provideAnimationsAsync(),
     provideNativeDateAdapter(),
+    ...appStore,
+    ...appFirebaseConfig,
   ],
 };

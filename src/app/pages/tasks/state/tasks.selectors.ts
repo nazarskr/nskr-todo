@@ -1,6 +1,12 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { TasksState } from './tasks.state';
 import { Task, Filters } from '../interfaces';
+import {
+  filterByPriority,
+  filterBySearchQuery,
+  filterByStatus,
+  sortTasks,
+} from './utils';
 
 export const selectTasksState = createFeatureSelector<TasksState>('tasks');
 
@@ -25,38 +31,19 @@ export const selectFilters = createSelector(
 );
 
 export const selectFilteredAndSortedTasks = createSelector(
-  selectTasksState,
+  selectTasks,
   selectFilters,
-  (state: TasksState, filters: Filters) => {
-    let filteredTasks: Task[] = [...state.tasks];
+  (tasks: Task[], filters: Filters) => {
+    let filteredTasks: Task[] = [...tasks];
 
-    filteredTasks.sort((a, b) => {
-      const direction = filters.sortDirection === 'asc' ? 1 : -1;
-
-      // @ts-expect-error null or undefined?
-      if (a[filters.sortBy] < b[filters.sortBy]) return -1 * direction;
-      // @ts-expect-error null or undefined?
-      if (a[filters.sortBy] > b[filters.sortBy]) return 1 * direction;
-      return 0;
-    });
-
-    if (filters.status !== 'all') {
-      filteredTasks = filteredTasks.filter(
-        (task) => task.status === filters.status,
-      );
-    }
-
-    if (filters.priority !== 'all') {
-      filteredTasks = filteredTasks.filter(
-        (task) => task.priority === filters.priority,
-      );
-    }
-
-    filteredTasks = filteredTasks.filter((task) =>
-      task.description
-        .toLowerCase()
-        .includes(filters.searchQuery.toLowerCase()),
+    filteredTasks = sortTasks(
+      filteredTasks,
+      filters.sortBy,
+      filters.sortDirection,
     );
+    filteredTasks = filterByStatus(filteredTasks, filters.status);
+    filteredTasks = filterByPriority(filteredTasks, filters.priority);
+    filteredTasks = filterBySearchQuery(filteredTasks, filters.searchQuery);
 
     return filteredTasks;
   },

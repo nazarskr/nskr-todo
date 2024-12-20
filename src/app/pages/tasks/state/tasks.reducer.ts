@@ -103,17 +103,17 @@ export const tasksReducer = createReducer(
     filters: initialTasksState.filters,
   })),
 
+  on(TasksActions.toggleTaskSelection, (state, { id, selected }) => ({
+    ...state,
+    tasks: state.tasks.map((task) =>
+      task.id === id ? { ...task, checkMark: selected } : task,
+    ),
+  })),
   on(TasksActions.selectAllTasks, (state, { selected }) => ({
     ...state,
     tasks: state.tasks.map((task) => ({
       ...task,
       checkMark: selected,
     })),
-  })),
-  on(TasksActions.toggleTaskSelection, (state, { id, selected }) => ({
-    ...state,
-    tasks: state.tasks.map((task) =>
-      task.id === id ? { ...task, checkMark: selected } : task,
-    ),
   })),
 );

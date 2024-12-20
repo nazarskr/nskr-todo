@@ -6,4 +6,8 @@
   height: 100vh;
   background-color: colors.$overlay-backdrop-color;
   @include mixins.flex-row-center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
 }

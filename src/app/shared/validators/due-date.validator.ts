@@ -6,7 +6,7 @@ export function dueDateValidator(): (
   return (control: AbstractControl) => {
     const value = control.value;
     if (value && new Date(value) < new Date()) {
-      return { pastDate: true }; // Дата не може бути раніше, ніж сьогодні
+      return { pastDate: true };
     }
     return null;
   };

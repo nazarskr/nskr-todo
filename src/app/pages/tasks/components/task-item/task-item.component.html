@@ -9,11 +9,11 @@
   <mat-card-content>
     <div class="left">
       <p class="text description">{{ task.description }}</p>
-      <p class="text-2">
+      <p class="text-2 date">
         Due Date: {{ task.dueDate | toDate | date: "dd/MM/yyyy" }}
       </p>
       @if (task.completionDate) {
-        <p class="text-2">
+        <p class="text-2 date">
           Completion Date:
           {{ task.completionDate | toDate | date: "dd/MM/yyyy" }}
         </p>

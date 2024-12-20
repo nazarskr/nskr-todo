@@ -6,42 +6,30 @@ import {
 } from '@angular/core';
 import {
   MAT_DIALOG_DATA,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
+  MatDialogModule,
   MatDialogRef,
-  MatDialogTitle,
 } from '@angular/material/dialog';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Priority, Status } from '../../enums';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
-import {
-  MatDatepicker,
-  MatDatepickerInput,
-  MatDatepickerToggle,
-} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { MatIcon } from '@angular/material/icon';
 import { MatMiniFabButton } from '@angular/material/button';
 import { dueDateValidator, xssValidator } from '@shared/validators';
-import { priorityMap } from '../utils/priority-map';
+import { priorityMap } from '../../utils/priority-map';
 
 @Component({
   selector: 'nskr-task-add-edit',
   imports: [
-    MatDialogTitle,
-    MatDialogContent,
-    MatFormFieldModule,
-    MatInput,
-    MatDatepickerInput,
     ReactiveFormsModule,
-    MatDatepickerToggle,
-    MatDatepicker,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatInput,
     MatSelect,
     MatOption,
-    MatDialogActions,
-    MatDialogClose,
     MatIcon,
     MatMiniFabButton,
   ],

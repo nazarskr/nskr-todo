@@ -1,25 +1,15 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   MAT_DIALOG_DATA,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
+  MatDialogModule,
   MatDialogRef,
-  MatDialogTitle,
 } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
 import { MatMiniFabButton } from '@angular/material/button';
 
 @Component({
   selector: 'nskr-task-delete',
-  imports: [
-    MatDialogTitle,
-    MatDialogContent,
-    MatDialogActions,
-    MatIcon,
-    MatMiniFabButton,
-    MatDialogClose,
-  ],
+  imports: [MatDialogModule, MatIcon, MatMiniFabButton],
   templateUrl: './task-delete.component.html',
   styleUrl: './task-delete.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

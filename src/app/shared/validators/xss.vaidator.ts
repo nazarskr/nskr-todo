@@ -5,7 +5,7 @@ export function xssValidator(): (
 ) => ValidationErrors | null {
   return (control: AbstractControl) => {
     const value = control.value || '';
-    const isXSS = /<script.*?>.*?<\/script>|<.*?on\w+=.*?>/i.test(value); // Простий приклад перевірки XSS
+    const isXSS = /<script.*?>.*?<\/script>|<.*?on\w+=.*?>/i.test(value);
     return isXSS ? { xssDetected: true } : null;
   };
 }

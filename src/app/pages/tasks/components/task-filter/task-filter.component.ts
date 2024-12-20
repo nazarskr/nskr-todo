@@ -21,7 +21,7 @@ import {
   selectSelectedTasks,
 } from '../../state/tasks.selectors';
 import { AsyncPipe } from '@angular/common';
-import { priorityMap } from '../utils/priority-map';
+import { priorityMap } from '../../utils/priority-map';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { Task } from '../../interfaces';
 
